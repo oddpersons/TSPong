@@ -1,4 +1,10 @@
 export class Vector2D {
-    public x : number = 0
-    public y : number = 0
+    public x : number;
+    public y : number;
+
+    constructor(xCoord: number = 0, yCoord: number = 0)
+    {
+        this.x = xCoord;
+        this.y = yCoord;
+    }
 }

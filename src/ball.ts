@@ -1,25 +1,30 @@
 import { Vector2D } from "./Vector2D"
 import { Color } from "./Color";
+import { DrawableObject } from "./DrawableObject";
 
-export class Ball {
+export class Ball implements DrawableObject{
     coords : Vector2D = new Vector2D();
     velocity : Vector2D = new Vector2D();
+    radius : number = 25;
     //src : string = "";
     color : Color = new Color(255, 0, 0);
-    model : Path2D = new Path2D();
 
-    constructor()
+    constructor(x : number = 100, y: number = 100)
     {
-        this.model.arc(100, 35, 25, 0, 2 * Math.PI);
+        this.coords.x = x;
+        this.coords.y = y;
     }
 
-    draw(context : CanvasRenderingContext2D)
+    draw(context : CanvasRenderingContext2D) : void
     {
-        //backup fillstyle
-        let oldFillStyle = context.fillStyle;
+        context.beginPath();
         context.fillStyle = this.color.toString();
-        context.fill(this.model);
-        //restore fill style
-        context.fillStyle = oldFillStyle;
+        context.arc(this.coords.x, this.coords.y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+    }
+
+    update() : void {
+        throw new Error("Method not implemented.");
     }
 }

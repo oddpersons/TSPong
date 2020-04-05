@@ -1,4 +1,5 @@
-import { Ball } from "./ball";
+import { Ball } from "./Ball";
+import { Paddle } from "./Paddle";
 
 window.onload = function() {
     let canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
@@ -20,4 +21,11 @@ window.onload = function() {
     }
     let ball : Ball = new Ball();
     ball.draw(ctx);
+
+    let ball2 : Ball = new Ball(200, 200);
+    ball2.color.g = 255;
+    ball2.draw(ctx);
+
+    let paddle : Paddle = new Paddle();
+    paddle.draw(ctx);
 }
