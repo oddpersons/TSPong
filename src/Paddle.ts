@@ -6,7 +6,9 @@ import { Size } from "./Size";
 export class Paddle implements DrawableObject{
     coords : Vector2D = new Vector2D(25, 25);
     size : Size = new Size(30, 5);
-    color: Color = new Color(0, 0, 255);
+    color : Color = new Color(0, 0, 255);
+    EventMap : Map<string, () => void> = new Map<string, () => void>();
+    keys : Map<string, boolean> = new Map<string,boolean>();
 
     draw(context: CanvasRenderingContext2D): void {
         context.beginPath();
@@ -17,6 +19,23 @@ export class Paddle implements DrawableObject{
     }
     
     update() : void {
-        throw new Error("Method not implemented.");
+        this.EventMap.forEach((value: () => void, name: string) => 
+            {
+                let key = this.keys.get(name);
+                if(key != undefined && key.valueOf() === true){
+                    let f = value.bind(this);
+                    f();
+                }
+            }
+        );
+    }
+
+    moveUp() : void {
+        console.log('Move Up detected');
+        this.coords.y -= 5;
+    }
+    moveDown() : void {
+        console.log('Move Up detected');
+        this.coords.y += 5;
     }
 }

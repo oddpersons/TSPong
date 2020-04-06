@@ -1,12 +1,12 @@
 import { Vector2D } from "./Vector2D"
 import { Color } from "./Color";
 import { DrawableObject } from "./DrawableObject";
+import { RadialVector } from "./RadialVector";
 
 export class Ball implements DrawableObject{
     coords : Vector2D = new Vector2D();
-    velocity : Vector2D = new Vector2D();
+    velocity : RadialVector = new RadialVector(270, 5);
     radius : number = 25;
-    //src : string = "";
     color : Color = new Color(255, 0, 0);
 
     constructor(x : number = 100, y: number = 100)
@@ -25,6 +25,6 @@ export class Ball implements DrawableObject{
     }
 
     update() : void {
-        throw new Error("Method not implemented.");
+        this.coords = this.velocity.fromVector2D(this.coords);
     }
 }

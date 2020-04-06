@@ -7,4 +7,8 @@ export class Vector2D {
         this.x = xCoord;
         this.y = yCoord;
     }
+
+    toString = () : string => {
+        return `x: ${this.x}, y: ${this.y}`;
+    }
 }
