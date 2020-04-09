@@ -2,8 +2,9 @@ import { Vector2D } from "./Vector2D";
 import { DrawableObject } from "./DrawableObject";
 import { Color } from "./Color";
 import { Size } from "./Size";
+import { Rectangle } from "./Rectangle";
 
-export class Paddle implements DrawableObject{
+export class Paddle extends Rectangle {
     coords : Vector2D = new Vector2D(25, 25);
     size : Size = new Size(30, 5);
     color : Color = new Color(0, 0, 255);
@@ -16,6 +17,12 @@ export class Paddle implements DrawableObject{
         context.rect(this.coords.x, this.coords.y, this.size.width, this.size.height);
         context.fill();
         context.closePath();
+        context.beginPath();
+        //this.generateColisionVerticies(null).forEach(o => {
+        //    context.fillRect(o.x,o.y,5,5)
+        //});
+        context.closePath();
+        this.hasMoved = false;
     }
     
     update() : void {
@@ -31,11 +38,11 @@ export class Paddle implements DrawableObject{
     }
 
     moveUp() : void {
-        console.log('Move Up detected');
         this.coords.y -= 5;
+        this.hasMoved = true;
     }
     moveDown() : void {
-        console.log('Move Up detected');
         this.coords.y += 5;
+        this.hasMoved = true;
     }
 }

@@ -24,14 +24,17 @@ class GameLogic {
             throw new Error('Canvas is null');
         }
 
-        let ball : Ball = new Ball();
-        this.drawableObjects.push(ball);
+        //let ball : Ball = new Ball();
+        //this.drawableObjects.push(ball);
     
         let ball2 : Ball = new Ball(200, 200);
         ball2.color.g = 255;
         this.drawableObjects.push(ball2);
-    
+        
+        ball2.drawableObjects = this.drawableObjects;
+
         let paddle : Paddle = new Paddle();
+        /*
         paddle.keys = this.keys;
         paddle.EventMap.set("KeyW", paddle.moveUp);
         paddle.EventMap.set("KeyS", paddle.moveDown);
@@ -39,6 +42,7 @@ class GameLogic {
         this.drawableObjects.push(paddle);
 
         paddle = new Paddle();
+        */
         paddle.color = new Color(0, 255, 0);
         paddle.coords.x = this.canvas.width - 25;
         paddle.keys = this.keys;
