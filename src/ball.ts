@@ -24,7 +24,7 @@ export class Ball extends Circle{
         let collisions = this.collisionCheck(this.drawableObjects);
         if(collisions.length > 0)
         {
-            console.log('collsision from ball!');
+            //console.log('collsision from ball!');
         }
     }
 }

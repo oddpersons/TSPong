@@ -47,6 +47,7 @@ class GameLogic {
         paddle.size.height = 300;
         paddle.size.width = 100;
         paddle.keys = this.keys;
+        paddle.drawableObjects = this.drawableObjects;
         paddle.EventMap.set("ArrowUp", paddle.moveUp);
         paddle.EventMap.set("ArrowDown", paddle.moveDown);
         this.drawableObjects.push(paddle);

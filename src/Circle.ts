@@ -52,8 +52,7 @@ export abstract class Circle extends DrawableObject {
         
         remotePoints = compareObject.generateColisionVerticies(this);
         results = remotePoints.map(x => {
-            let v : Vector2D;
-            let slope : number = (x.x - this.coords.x) / (x.y - this.coords.y);
+            let v : Vector2D; 
             let rv = new RadialVector(((Math.atan2((this.coords.y - x.y), (this.coords.x - x.x)) + Math.PI) * 180)*-1/Math.PI, this.radius);
             v = rv.fromVector2D(this.coords);
             return v;
@@ -66,24 +65,26 @@ export abstract class Circle extends DrawableObject {
         return results;
     }
 
-    collisionCheck(gameObjects: Array<DrawableObject>) : Array<DrawableObject> {
-        let collisions = new Array<DrawableObject>();
+    collisionCheck(gameObjects: Array<DrawableObject>) : Array<Vector2D[]> {
+        let collisions = new Array<Vector2D[]>();
         if(this.hasMoved === true)
         {
-            collisions = gameObjects.filter(o => {
+            //look at center + diameter or bounding box and see if it can hit the box before checking all 8 possible impact points?
+            collisions = gameObjects.flatMap<Vector2D[]>(o => {
+                let mr : Array<Vector2D> = new Array<Vector2D>();
                 if(o instanceof Circle)
                 {
                     
                 }
                 else if (o instanceof Rectangle)
                 {
-                    let mr = this.generateColisionVerticies(o).filter(cv => {
+                    mr = this.generateColisionVerticies(o).filter(cv => {
                         let ret =  o.pointColisionCheck(cv);
                         return ret;
                     });
-                    return mr.length > 0;
-                }            
-            });
+                }
+                return mr;
+            }).filter(v => v !== undefined);
         }
         return collisions;
     }

@@ -13,5 +13,5 @@ export abstract class DrawableObject {
     abstract generateColisionVerticies(compareObject : DrawableObject | null) : Array<Vector2D>;
     abstract generateCenter(compareObject : DrawableObject) : Vector2D;
 
-    abstract collisionCheck(gameObjects: Array<DrawableObject>) : Array<DrawableObject>;
+    abstract collisionCheck(gameObjects: Array<DrawableObject>) : Array<Vector2D[]>;
 }

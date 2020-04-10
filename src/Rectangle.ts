@@ -40,18 +40,19 @@ export abstract class Rectangle extends DrawableObject {
         return results;
     }
 
-    collisionCheck(gameObjects: Array<DrawableObject>) : Array<DrawableObject> {
-        let collisions = new Array<DrawableObject>();
+    collisionCheck(gameObjects: Array<DrawableObject>) : Array<Vector2D[]> {
+        let collisions = new Array<Vector2D[]>();
         if(this.hasMoved === true)
         {
-            collisions = gameObjects.filter(o => {
-                //look at center + diameter and see if it can hit the box before checking all 8 possible impact points?
+            collisions = gameObjects.flatMap<Vector2D[]>(o => {
+                
                 let ret = o.generateColisionVerticies(this).filter(cv => {
                     return this.pointColisionCheck(cv);
                 });
-                return ret.length > 0;
-            });
+                return ret;
+            }).filter(v => v !== undefined);
         }
+        
         return collisions;
     }
 
