@@ -27,14 +27,13 @@ class GameLogic {
         //let ball : Ball = new Ball();
         //this.drawableObjects.push(ball);
     
-        let ball2 : Ball = new Ball(200, 200);
-        ball2.color.g = 255;
-        this.drawableObjects.push(ball2);
-        
-        ball2.drawableObjects = this.drawableObjects;
+
 
         let paddle : Paddle = new Paddle();
         /*
+        paddle.color = new Color(255, 0, 144);
+        paddle.size.height = 300;
+        paddle.size.width = 100;
         paddle.keys = this.keys;
         paddle.EventMap.set("KeyW", paddle.moveUp);
         paddle.EventMap.set("KeyS", paddle.moveDown);
@@ -43,12 +42,21 @@ class GameLogic {
 
         paddle = new Paddle();
         */
-        paddle.color = new Color(0, 255, 0);
-        paddle.coords.x = this.canvas.width - 25;
+        paddle.color = new Color(255, 0, 0);
+        paddle.coords.x = this.canvas.width - 125;
+        paddle.size.height = 300;
+        paddle.size.width = 100;
         paddle.keys = this.keys;
         paddle.EventMap.set("ArrowUp", paddle.moveUp);
         paddle.EventMap.set("ArrowDown", paddle.moveDown);
         this.drawableObjects.push(paddle);
+
+        let ball2 : Ball = new Ball(400, 300);
+        ball2.color.g = 255;
+        this.drawableObjects.push(ball2);
+        ball2.velocity.radius = 1;
+        ball2.velocity.degrees = 0;
+        ball2.drawableObjects = this.drawableObjects;
 
         window.onkeydown = this.onKeyDown;
         window.onkeyup = this.onKeyUp;

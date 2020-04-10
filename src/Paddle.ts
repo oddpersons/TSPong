@@ -11,20 +11,6 @@ export class Paddle extends Rectangle {
     EventMap : Map<string, () => void> = new Map<string, () => void>();
     keys : Map<string, boolean> = new Map<string,boolean>();
 
-    draw(context: CanvasRenderingContext2D): void {
-        context.beginPath();
-        context.fillStyle = this.color.toString();
-        context.rect(this.coords.x, this.coords.y, this.size.width, this.size.height);
-        context.fill();
-        context.closePath();
-        context.beginPath();
-        //this.generateColisionVerticies(null).forEach(o => {
-        //    context.fillRect(o.x,o.y,5,5)
-        //});
-        context.closePath();
-        this.hasMoved = false;
-    }
-    
     update() : void {
         this.EventMap.forEach((value: () => void, name: string) => 
             {
@@ -35,6 +21,12 @@ export class Paddle extends Rectangle {
                 }
             }
         );
+
+        let collisions = this.collisionCheck(this.drawableObjects);
+        if(collisions.length > 0)
+        {
+            console.log('collsision from paddle!');
+        }
     }
 
     moveUp() : void {
